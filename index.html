@@ -54,7 +54,7 @@
                   'access_token=' + params['access_token']);
               xhr.onreadystatechange = function (e) {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                  downloadCaptions(xhr.response);
+                  downloadCaptions(xhr);
                 } else if (xhr.readyState === 4 && xhr.status === 401) {
                   // Token invalid, so prompt for user permission.
                   oauth2SignIn();
@@ -105,9 +105,9 @@
           }
 
           function downloadCaptions(response) {
-            console.log(response);
+            console.log(req);
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://www.googleapis.com/youtube/v3/captions?id=' + response.items[0].id + '&' + 'access_token=' + params['access_token']);
+            xhr.open('GET', 'https://www.googleapis.com/youtube/v3/captions?id=' + req.response.items[0].id + '&' + 'access_token=' + params['access_token']);
             xhr.onreadystatechange = function (e) {
               if (xhr.readyState === 4 && xhr.status === 200) {
                   console.log(xhr.response);
