@@ -104,7 +104,7 @@
             form.submit();
           }
 
-          function downloadCaptions(response) {
+          function downloadCaptions(req) {
             console.log(req);
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'https://www.googleapis.com/youtube/v3/captions?id=' + req.response.items[0].id + '&' + 'access_token=' + params['access_token']);
