@@ -17,8 +17,7 @@
           if (Object.keys(params).length > 0 && params['state']) {
             if (params['state'] == localStorage.getItem('state')) {
               localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
-        
-              trySampleRequest();
+              triggerRequest();
             } else {
               console.log('State mismatch. Possible CSRF attack');
             }
@@ -44,12 +43,12 @@
         
           // If there's an access token, try an API request.
           // Otherwise, start OAuth 2.0 flow.
-          function TriggerRequest() {
+          function triggerRequest() {
             var videoId = document.getElementById("videoId").value;
             var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
-            if (params && params['access_token']) { 
-              var xhr = new XMLHttpRequest();
+            if (params && params['access_token']) {    
               var url = 'https://www.googleapis.com/youtube/v3/captions?part=snippet&videoId=' + videoId + '&access_token=' + params['access_token'];
+              var xhr = new XMLHttpRequest();
               xhr.open('GET', url);
               xhr.onreadystatechange = function (e) {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -118,6 +117,6 @@
           }
         </script>
         
-        <button onclick="TriggerRequest();">Search</button>
+        <button onclick="triggerRequest();">Search</button>
     </body>
 </html>
