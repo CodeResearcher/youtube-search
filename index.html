@@ -108,7 +108,7 @@
             console.log(req.response);
             var res = JSON.parse(req.response);
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://www.googleapis.com/youtube/v3/captions?id=' + res.items[0].id + '&' + 'access_token=' + params['access_token']);
+            xhr.open('GET', 'https://www.googleapis.com/youtube/v3/captions/' + res.items[0].id + '&' + 'access_token=' + params['access_token']);
             xhr.onreadystatechange = function (e) {
               if (xhr.readyState === 4 && xhr.status === 200) {
                   console.log(xhr.response);
